@@ -1,0 +1,99 @@
+﻿@model GamePanel.Models.MinecraftServer
+
+<h2>הגדרות</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary();
+     
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name, "שם השרת")
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+        
+    <div class="editor-label">
+        @Html.LabelFor(model => model.World, "עולם")
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.World)
+        @Html.ValidationMessageFor(model => model.World)
+    </div>
+        
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Pvp)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Pvp)
+        @Html.ValidationMessageFor(model => model.Pvp)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.SpawnProtection)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.SpawnProtection)
+        @Html.ValidationMessageFor(model => model.SpawnProtection)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AllowFlight)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.AllowFlight)
+        @Html.ValidationMessageFor(model => model.AllowFlight)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.SpawnAnimals)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.SpawnAnimals)
+        @Html.ValidationMessageFor(model => model.SpawnAnimals)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.SpawnMonsters)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.SpawnMonsters)
+        @Html.ValidationMessageFor(model => model.SpawnMonsters)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ViewDistance)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.ViewDistance)
+        @Html.ValidationMessageFor(model => model.ViewDistance)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AllowNether)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.AllowNether)
+        @Html.ValidationMessageFor(model => model.AllowNether)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.WhiteList)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.WhiteList)
+        @Html.ValidationMessageFor(model => model.WhiteList)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.OnlineMode)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.OnlineMode)
+        @Html.ValidationMessageFor(model => model.OnlineMode)
+    </div>
+  
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+}

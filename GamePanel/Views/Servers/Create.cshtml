@@ -1,0 +1,90 @@
+﻿@model GamePanel.Models.Server
+@{
+    var game = (GamePanel.Models.Game)ViewData["Game"];
+    ViewBag.Title = "Create";
+}
+<h2>
+    קנה שרת משחק חדש</h2>
+
+<script>
+    $(document).ready(function () {
+        $(":text").labelify();
+        var max = @ViewData["Credits"];
+
+        $("#MaxPlayers, #months").change(function() {
+            $.get("/Servers/Price/", { gameId: @game.Id, maxplayers: $("#MaxPlayers").val(), months: $("#months").val() }, function(data) {
+                update(parseInt(data));
+            });
+        });
+      
+        function update(credits) {                        
+            $("#finalPrice").text(credits);
+
+            if (credits > max) {
+                $("#finalPrice").parent().css("color", "red");
+                $("input[type=submit]").attr("disabled", true);
+            }
+            else {
+                $("#finalPrice").parent().css("color", "white");
+                $("input[type=submit]").attr("disabled", false);
+            }
+        }
+
+        update(@game.BaseCredits);
+    });
+</script>
+<div style="padding-right:10px;padding-left:10px;padding-bottom:10px;background-color:#829F53;color: White;">
+    <div class="grid" style="width: 45%;">
+        <div class="group">
+            <div class="item" style="font-weight: bold;">משחק</div>
+            <div class="item">@game.Name <img width="16" height="16" src="@Url.Content("~/Assets/images/games/" + game.Abbreviation + ".png")" alt="@game.Name" /></div>
+        </div>
+        <div class="group">
+            <div class="item" style="font-weight: bold;">המחיר הנוכחי</div>
+            <div class="item"><span id="finalPrice">@game.BaseCredits</span> קרדיטים</div>
+        </div>
+    </div>
+</div>
+<div style="width: 480px;">
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="editor-label">
+        <b>@Html.LabelFor(model => model.Name, "שם השרת")</b>
+        <br />
+        <small>כשהשרת יתווסף לפאנל שלך, ככה תוכל לזהות אותו.</small>
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div class="editor-label">
+        <b>@Html.LabelFor(model => model.MaxPlayers, "מספר שחקנים")</b>
+        <br />
+        <small>ניתן לשנות מאוחר יותר את כמות השחקנים.</small>
+    </div>
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.MaxPlayers, GamePanel.Utilities.SlotUtils.GenerateDropDownList(game.SlotSteps, game.Price), new { style = "width: 200px;" })
+        @Html.ValidationMessageFor(model => model.MaxPlayers)
+    </div>
+    
+    <div class="editor-label">
+        <b>@Html.LabelFor(model => model.MaxPlayers, "זמן")</b>
+        <br />
+        <small>ניתן להרחיב אחר כך ליותר זמן.</small>
+    </div>
+     <div class="editor-field">
+        <select id="months" name="months" style="width: 200px;">
+            <option value="1">חודש</option>
+            <option value="2">חודשיים</option>
+            <option value="3">3 חודשים</option>
+        </select>
+    </div>   
+    
+    <p style="float: left;">
+        <input type="submit" value="הזמן עכשיו &larr;" />
+    </p>
+}
+</div>

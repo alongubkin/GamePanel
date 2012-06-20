@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GamePanel.Models.User>
+           
+<p>
+    @Html.ActionLink("משתמש חדש", "Create")
+</p>
+
+<script>
+    $(document).ready(function () {
+        var editing = false;
+
+        $(".credits").click(function () {
+            if (editing)
+                return;
+
+            var that = $(this);
+            var credits = $(this).text();
+            var userId = $(this).attr("data-userId");
+
+            $(this).empty().append(
+                $("<input></input>")
+                    .val(credits)
+                    .keypress(function (event) {
+                        if (event.which == 13) {
+                            event.preventDefault();
+                            var newCredits = $(this).val();
+
+                            $.post("/users/credits/" + userId, { credits: $(this).val() }, function () {
+                                that.empty().text(newCredits);
+                                editing = false;
+                            });
+                        }
+                    })
+            );
+
+            editing = true;
+        });
+    });
+</script>
+
+<table width="100%">
+    <tr>
+        <th align="right">שם משתמש</th>
+        <th align="right">קרדיטים</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@item.PhysicalUser.UserName</td>
+        <td class="credits" data-userId="@item.Id">@item.Credits</td>
+        <td>
+            @Html.ActionLink("מחיקה", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+

@@ -1,0 +1,37 @@
+/*** ESSENTIAL STYLES ***/
+.sf-menu li {float:right;}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {right:0;left:auto;}
+
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {right:10em; left:auto;}
+
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {right:10em; left:auto;}
+
+/*** DEMO SKIN ***/
+.sf-menu {float:right;}
+.sf-menu a {border-right:1px solid #fff; border-left:none;}
+
+/*** arrows **/
+.sf-menu a.sf-with-ul {padding-left:2.25em; padding-right:1em;}
+.sf-sub-indicator {right:auto;left:.75em; background-image:url('../images/arrows-ffffff-rtl.png');}
+.sf-shadow ul {
+	padding:0 0 9px 8px; background-position:left bottom;
+
+	border-top-left-radius: 17px;
+	border-bottom-right-radius: 17px;
+	-moz-border-radius-bottomleft: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+
+	-moz-border-radius-bottomright: 17px;
+	-moz-border-radius-topleft: 17px;
+	-webkit-border-top-left-radius: 17px;
+	-webkit-border-bottom-right-radius: 17px;
+	border-top-left-radius: 17px;
+	border-bottom-right-radius: 17px;
+}
+
+

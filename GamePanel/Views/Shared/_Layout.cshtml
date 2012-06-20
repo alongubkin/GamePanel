@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>GamePanel</title>
+
+    <link href="@Url.Content("~/assets/Site.css")" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="http://cdn.jquerytools.org/1.2.5/jquery.tools.min.js"></script>
+    <script src="@Url.Content("~/assets/js/jquery.labelify.js")"></script>
+</head>
+
+<body>
+    <div style="width: 128px; margin-right: auto; margin-left: auto;margin-top:20px;margin-bottom:10px;">
+        <a href="/servers"><img src="@Url.Content("~/assets/images/control_panel.png")" /></a>
+    </div>
+
+    
+    @if (Membership.GetUser() != null)
+    {  
+        <div style="width: 100%; font-size: 16px; text-align: center; margin-bottom: 20px;">
+            @Html.ActionLink("שינוי סיסמא", "ChangePassword", "Users")
+            <span>|</span>
+            @Html.ActionLink("התנתק", "LogOff", "Users")
+        </div>
+    }
+    
+    @RenderBody()
+
+    <div style="width: 100%; text-align: center; margin-top: 70px; direction: ltr; display: block;">
+        <a href="https://plus.google.com/103647754790826849129">unknown</a> &copy; 2011
+    </div>
+</body>
+</html>

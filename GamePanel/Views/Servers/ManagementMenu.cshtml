@@ -1,0 +1,29 @@
+﻿@model GamePanel.Models.Server
+           
+<ul class="sf-menu">
+    <li class="current">
+		@Html.ActionLink("תחזוקה", "Manage", new { Id = Model.Id })
+	</li>
+
+	<li>
+		@Html.ActionLink("שינוי הגדרות", "Settings", new { Id = Model.Id })
+	</li>
+
+	<li>
+		@Html.ActionLink("שדרוג", "Upgrade", new { Id = Model.Id })
+	</li>
+
+	<li>
+		@Html.ActionLink("ניהול קבצים", "FileManager", new { Id = Model.Id })
+	</li>
+
+	<li>
+		@Html.ActionLink("מסוף", "Console", new { Id = Model.Id })
+	</li>
+
+	<li>
+   	    @Html.ActionLink("מחיקת שרת", "Delete", new { Id = Model.Id }, new { style = "color: #ff0000" })
+   	</li>	
+		
+</ul>
+<br /><br /><br />

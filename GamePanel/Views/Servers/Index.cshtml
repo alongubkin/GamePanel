@@ -1,0 +1,60 @@
+﻿@model GamePanel.Controllers.IndexModel
+@{
+    ViewBag.Title = "פאנל ניהול";
+}
+<script>
+    $(document).ready(function () {
+        $("[title]").tooltip();
+    });
+</script>
+<div style="background-color: #064B6B; padding: 20px;padding-right: 40px; height:450px;border-radius:16px;">
+    <div style="width: 49%; float: right; padding-left: 1px;">
+        <h2>
+            קנה שרת חדש</h2>
+        <div>
+            <b>יש לך כרגע</b>: @Model.User.Credits קרדיטים.</div>
+        <br />
+        <div>
+            כדי לקנות שרת משחק חדש, אנא בחר את המשחק הרצוי מהרשימה הבאה:</div>
+        <div style="margin-top: 10px; margin-right: 8%;">
+            @foreach (var item in Model.Games)
+            {
+                <div style="float: right; background: #155C7D; border-radius: 12px; padding: 5px;
+                    margin: 5px;margin-top:15px;">
+                    <a href="@Url.Action("Create", new { Id = item.Id })">
+                        <img src="@Url.Content(Path.Combine("~/Assets/images/games", item.Abbreviation + ".png"))" alt="@item.Name" title="@item.Name" /></a>
+                </div>
+            }
+        </div>
+    </div>
+    <div style="width: 49%; float: left;">
+        <h2>
+            השרתים שלך</h2>
+        @if (Model.User.Servers.Count() == 0)
+        {
+            <p>
+                עדיין לא קנית אף שרת :(</p>
+        }
+        else
+        {
+            <table width="100%" >
+                <tbody>
+                    @foreach (var item in Model.User.Servers.ToList())
+                    {
+                        <tr>
+                            <td style="width: 5%;">
+                                <img src="@Url.Content(Path.Combine("~/Assets/images/games", item.Game.Abbreviation + ".png"))" alt="@item.Game.Name" width="16" height="16"/>
+                            </td>
+                            <td style="width: 45%;">
+                                @Html.ActionLink(String.IsNullOrWhiteSpace(item.Name) ? "<אין שם>" : item.Name, "Manage", new { id = item.Id })
+                            </td>
+                            <td style="width: 49%;">
+                                @item.PublicIPAddress
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

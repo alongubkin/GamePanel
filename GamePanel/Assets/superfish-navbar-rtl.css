@@ -1,0 +1,14 @@
+
+.sf-navbar ul li {
+	
+	float:			right;
+}
+
+ul.sf-navbar .current ul,
+ul.sf-navbar ul li:hover ul,
+ul.sf-navbar ul li.sfHover ul {
+	left:			auto;
+	right:			0;
+	
+}
+

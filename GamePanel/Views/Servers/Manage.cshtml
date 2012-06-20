@@ -1,0 +1,186 @@
+﻿@model GamePanel.Models.Server  
+@{
+    ViewBag.Title = "Manage";
+}
+<script>
+    $(document).ready(function () {
+        var x = false;
+
+        $(".item a").click(function () {
+            if (x)
+                return false;
+        });
+
+        $(".refresh").click(function () {
+            if (x)
+                return false;
+
+            x = true;
+            $(this).parent().empty().append($("<img></img>").attr("src", "/assets/images/ajax-loader.gif"));
+            $.get($(this).attr("href"));
+
+            setTimeout(wait, 10000);
+
+            return false;
+        });
+    });
+
+    function wait() {
+        window.location.reload(true);
+    }
+</script>
+<h2>
+    ניהול שרת - @Model.Name</h2>
+<div>
+    <div style="background-color: #064B6B; color: #fff; width: 100%; height: 420px; padding: 10px;
+        border-radius: 10px;">
+        <div id="information_container">
+            <b>ברוכים הבאים לפאנל הניהול שלכם!</b>
+
+            <ul>
+                <li>בפאנל זה תוכלו להפעיל ולכבות את השרת שלכם, לעדכן אותו, לפרמט אותו, לקנות לו מודים יחודיים ועוד.</li>
+                <li>שימו לב שהפאנל עדיין חדש יחסית, אז אם יש באגים, פנו אלינו.</li>
+                <li>פרטי ה FTP שלכם רשומים בצד שמאל. כדי להתחבר לשרת ה FTP שלנו, תצטרכו תוכנה כמו FileZilla או FireFTP.</li>
+                <li>חלק מהתכונות של הפאנל (כמו המסוף) אינם זמינים בחלק מהמשחקים.</li>
+                @if (Model.ConfigurationType == "Valve")
+                    {
+                <li><em>אל</em> תשנו את סיסמת ה Rcon שלכם דרך ה FTP, <a href="/servers/settings/@Model.Id">אלא רק דרך הפאנל</a>. אחרת, המסוף לא יעבוד.</li>
+                }
+            </ul>
+        </div>
+        <div id="buttons_container">
+            <div class="grid">
+                <div class="group">
+                    <div class="item">
+                        @if (Model.IsActivated)
+                        {
+                            <a class="refresh" href="@Url.Action("Stop", new { Id = Model.Id })">
+                                <img src="@Url.Content("~/Assets/Images/stop.png")" alt="כיבוי" /></a>
+                            <br />
+                            <a class="refresh" href="@Url.Action("Stop", new { Id = Model.Id })">כיבוי</a>
+                        }
+                        else
+                        {
+                            <a class="refresh" href="@Url.Action("Start", new { Id = Model.Id })">
+                                <img src="@Url.Content("~/Assets/Images/start.png")" alt="הפעל" /></a>
+                            <br />
+                            <a class="refresh" href="@Url.Action("Start", new { Id = Model.Id })">הפעל</a>                
+                        }
+                    </div>
+                    <div class="item">
+                        <a class="refresh" href="@Url.Action("Restart", new { Id = Model.Id })">
+                            <img src="@Url.Content("~/Assets/Images/restart.png")" alt="הפעל מחדש" /></a>
+                        <br />
+                        <a href="@Url.Action("Restart", new { Id = Model.Id })">הפעל מחדש</a>
+                    </div>
+                    <div class="item">
+                        <a class="refresh" href="@Url.Action("Update", new { Id = Model.Id })">
+                            <img src="@Url.Content("~/Assets/Images/update.png")" alt="עדכון" /></a>
+                        <br />
+                        <a class="refresh" href="@Url.Action("Update", new { Id = Model.Id })">עדכון</a>
+                    </div>
+                    @if (Model.ConfigurationType == "Valve")
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("Console", new { Id = Model.Id })">
+                                <img src="@Url.Content("~/Assets/Images/console.png")" alt="מסוף" /></a>
+                            <br />
+                            <a href="@Url.Action("Console", new { Id = Model.Id })">מסוף</a>
+                        </div>
+                    }
+                </div>
+                <div class="group">
+                    <div class="item">
+                        <a class="refresh" href="@Url.Action("Reinstall", new { Id = Model.Id })">
+                            <img src="@Url.Content("~/Assets/Images/reinstall.png")" alt="פירמוט" /></a>
+                        <br />
+                        <a class="refresh" href="@Url.Action("Reinstall", new { Id = Model.Id })">פירמוט</a>
+                    </div>
+                    <div class="item">
+                        <a href="@Url.Action("Settings", new { Id = Model.Id })">
+                            <img src="@Url.Content("~/Assets/Images/settings.png")" alt="הגדרות" /></a>
+                        <br />
+                        <a href="@Url.Action("Settings", new { Id = Model.Id })">הגדרות</a>
+                    </div>
+                    <div class="item">
+                        <a href="@Url.Action("ComingSoon", new { Id = Model.Id })">
+                            <img src="@Url.Content("~/Assets/Images/upgrade.png")" alt="שדרוג" /></a>
+                        <br />
+                        <a href="@Url.Action("ComingSoon", new { Id = Model.Id })">שדרוג</a>
+                    </div>
+                    <div class="item">
+                        <a href="@Url.Action("ComingSoon", new { Id = Model.Id })">
+                            <img src="@Url.Content("~/Assets/Images/shop.png")" alt="קניית מודים" /></a>
+                        <br />
+                        <a href="@Url.Action("ComingSoon", new { Id = Model.Id })">קניית מודים</a>
+                    </div>
+                </div>
+            </div>
+            <div style="background-color: #5A8F29; width: 97%; padding: 5px; border-radius: 3px;
+                margin-top: 30px; color: #fff;">
+                
+                <b>פרטי השרת</b>
+                <hr />
+                <table style="width: 90%">
+                    <tr>
+                        <th align="right">
+                            IP:
+                        </th>
+                        <td align="right">@Model.PublicIPAddress
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            תאריך סיום:
+                        </th>
+                        <td align="right" dir="ltr">@Model.EndDateTime
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            מקסימום שחקנים:
+                        </th>
+                        <td align="right" dir="ltr">@Model.MaxPlayers
+                        </td>
+                    </tr>
+                    @if (Model.ConfigurationType == "Valve")
+                    {
+                    <tr>
+                        <th align="right">
+                            סיסמת רקון:
+                        </th>
+                        <td align="right" dir="ltr">@(((GamePanel.Models.ValveServer)Model).RconPassword)
+                        </td>
+                    </tr>                       
+                    }
+                </table>
+                <br />
+                <b>פרטי FTP</b>
+                <hr />
+                <table style="width: 90%">
+                    <tr>
+                        <th align="right">
+                            כתובת:
+                        </th>
+                        <td align="right">@Model.FtpAddress
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            שם משתמש:
+                        </th>
+                        <td align="right">@(GamePanel.Utilities.ServerUtils.GetServerIdentifier(Model.Game.Abbreviation, Model.Id))
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            סיסמא:
+                        </th>
+                        <td align="right">@Model.FtpPassword
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

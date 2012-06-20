@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GamePanel.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServersDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Servers\Servers\</Value>
+    </Setting>
+    <Setting Name="OrginalDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Servers\Games\</Value>
+    </Setting>
+    <Setting Name="IPsFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Servers\ips.xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

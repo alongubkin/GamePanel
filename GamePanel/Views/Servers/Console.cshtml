@@ -1,0 +1,61 @@
+﻿@model GamePanel.Models.ValveServer
+
+@{
+    ViewBag.Title = "Console";
+}
+
+@if (Model.IsActivated)
+{
+<script src="http://cdn.socket.io/stable/socket.io.js"></script>
+<script>WEB_SOCKET_SWF_LOCATION = 'http://cdn.socket.io/stable/WebSocketMain.swf';</script>
+
+<script>
+    window.onload = function () {
+        var s = new io.Socket(window.location.hostname, { port: 8001, rememberTransport: false });
+        s.connect();
+
+        s.addEvent('connect', function () {
+            s.send({
+                'action': 'connect',
+                'host': '@Model.IP',
+                'port': @Model.Port,
+                'password': '@Model.RconPassword'
+            });
+        });
+
+        s.addEvent('message', function (message) {
+            message = $.parseJSON(message);
+
+            if (message['action'] == 'connected') {
+                $("#input, #output").removeAttr("disabled");
+            }
+            else {
+                $("#input").text($("#input").text() + "\n-> " + message['orginalCommand'] + "\n" + message['output']).scrollHeight(99999);
+            }
+        });
+
+        $("#output").keypress(function (event) {
+            if (event.which == '13') {
+                event.preventDefault();
+
+                s.send({
+                    'action': 'rcon',
+                    'command': $("#output").val()
+                });
+
+                $("#output").val("");
+            }
+
+            return true;
+        });
+    };
+</script>
+}
+
+<h2>מסוף</h2>
+
+<div style="direction: ltr;">
+    <textarea id="input" style="width: 100%; height: 400px;" disabled="disabled" readonly="readonly"></textarea>
+    <br />
+    <input id="output" type="text" disabled="disabled" style="width: 100%;" />
+</div>

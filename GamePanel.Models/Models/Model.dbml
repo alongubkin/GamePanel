@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GamePanel" ContextNamespace="GamePanel.Models" Class="ModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Credits" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_Server" Member="Servers" ThisKey="Id" OtherKey="UserId" Type="Server" />
+      <Association Name="PhysicalUser_User" Member="PhysicalUser" ThisKey="Id" OtherKey="UserId" Type="PhysicalUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Game" Member="Games">
+    <Type Name="Game">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="DirectoryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Enabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Abbreviation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfigurationType" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SlotSteps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BaseCredits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Engine" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="CreditsPerMonth" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DefaultMap" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Association Name="Game_Server" Member="Servers" ThisKey="Id" OtherKey="GameId" Type="Server" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Server" Member="Servers">
+    <Type Name="Server">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ConfigurationType" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" IsDiscriminator="true" />
+      <Column Name="GameId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(192) NOT NULL" CanBeNull="false" />
+      <Column Name="MaxPlayers" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="IP" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Port" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PublicIPAddress" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IsInstalled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActivated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StartDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FtpAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FtpPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Game_Server" Member="Game" ThisKey="GameId" OtherKey="Id" Type="Game" IsForeignKey="true" />
+      <Association Name="User_Server" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Type Name="ValveServer" InheritanceCode="Valve" IsInheritanceDefault="true">
+        <Column Name="MaximumFPS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+        <Column Name="RconPassword" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+        <Column Name="AutoUpdate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="Map" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      </Type>
+      <Type Name="SampServer" InheritanceCode="Samp">
+        <Column Name="RconPassword" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+        <Column Name="HostName" Type="System.String" DbType="VarChar(192) NOT NULL" CanBeNull="false" />
+      </Type>
+      <Type Name="MinecraftServer" InheritanceCode="Minecraft">
+        <Column Name="Pvp" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="SpawnProtection" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+        <Column Name="AllowFlight" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="SpawnAnimals" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="SpawnMonsters" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="ViewDistance" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+        <Column Name="AllowNether" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="WhiteList" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="OnlineMode" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+        <Column Name="Map" Member="World" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      </Type>
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="PhysicalUsers">
+    <Type Name="PhysicalUser">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="PhysicalUser_User" Member="Users" ThisKey="UserId" OtherKey="Id" Type="User" Cardinality="One" />
+    </Type>
+  </Table>
+</Database>

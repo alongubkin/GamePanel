@@ -1,0 +1,46 @@
+﻿@model GamePanel.Models.ValveServer
+
+<h2>הגדרות</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name, "שם השרת")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RconPassword, "סיסמת RCON")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RconPassword)
+            @Html.ValidationMessageFor(model => model.RconPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AutoUpdate, "עדכון אוטומטי")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AutoUpdate)
+            @Html.ValidationMessageFor(model => model.AutoUpdate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Map, "מפת ברירת מחדל (לדוגמא כשהשרת נופל)")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Map)
+            @Html.ValidationMessageFor(model => model.Map)
+        </div>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+}
+

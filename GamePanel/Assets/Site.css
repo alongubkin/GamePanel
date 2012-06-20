@@ -1,0 +1,197 @@
+﻿body
+{
+    direction: rtl;
+    font-family: Arial;
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #06376B;
+    color: #747E80;
+}
+
+input
+{
+    font-size: 100%;
+}
+
+.box
+{
+    border-radius: 3px;
+    border: solid #dcdcdc 1px;
+    position: absolute;
+    top: 10%;
+    right: 15%;
+    bottom: 25%;
+    left: 30%;
+    width: 60%;
+    height: 40%;
+}
+
+.column-first
+{
+    width: 29%;
+    background-color: #fafafa;
+    border-left: 1px #dcdcdc solid;
+    height: 98.8%;
+    float: right;
+    padding-top: 5px;
+    margin-left: 15px;
+}
+
+h2
+{
+    margin-top: -1px;
+    font-weight: 700;
+    color: #587A85;
+}
+
+.column-last
+{
+    width: 69%;
+    background-color: #fff;
+}
+
+.box-padding
+{
+    padding: 12px;
+}
+
+.input-box
+{
+    margin-bottom: 15px;
+}
+
+.input-box input
+{
+    border: 3px #eaeaea solid;
+    border-radius: 5px;
+    width: 250px;
+    padding: 3px;
+}
+
+#submit
+{
+    padding: 8px;
+    background-color: #09d;
+    border-radius: 8px;
+    border: 1px solid #08c;
+    width: 85px;
+    height: 40px;
+    float: left;
+}
+
+#submit:hover
+{
+    background-color: #08d;
+    border: 1px solid #08d;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.input-box input:focus
+{
+    outline: none;
+}
+
+a
+{
+    color: #08C;
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+.forget-link
+{
+    font-size: 80%;
+    margin-right: 15px;
+    margin-top: 70px;
+}
+
+.label-highlight
+{
+    color: #bcbcbc;
+}
+
+.display-label, .editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.display-field, .editor-field
+{
+    margin: 0.5em 0 0 0;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+
+#information_container
+{
+    width: 60%;
+    float: right;
+    padding: 3px;
+}
+
+#buttons_container
+{
+    width: 38%;
+    float: left;
+}
+.grid
+{
+    display: table;
+    width: 100%;
+}
+
+.grid .group
+{
+    display: table-row;
+    width: 100%;
+}
+
+.grid .group .item
+{
+    padding-top: 15px;
+    display: table-cell;
+}
+
+#buttons_container
+{
+    font-size: 12px;
+    font-weight: 500;
+    color: #237094;
+    text-align: center;
+}
+
+#information_container ul li
+{
+    margin-bottom: 25px;
+}
+
+.tooltip {
+	display:none;
+	background:transparent url(/Assets/images/black_arrow.png);
+	font-size:22px;
+	height:70px;
+	width:160px;
+	padding:25px;
+	color:#fff;	
+	text-align: center;
+	vertical-align: middle;
+}

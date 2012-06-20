@@ -1,0 +1,23 @@
+﻿@model GamePanel.Models.LogOnModel
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+
+<div style="background-color: #829F53;width:100%;height:177px;padding:20px;border-radius:10px; color:white;">
+<div style="width: 265px; margin-left:auto; margin-right:auto;">
+@using (Html.BeginForm())
+{
+    <div class="input-box">
+        @Html.LabelFor(p=>p.UserName, "שם משתמש")
+        @Html.TextBoxFor(m => m.UserName)
+    </div>
+				
+    <div class="input-box">
+        @Html.LabelFor(p=>p.UserName, "סיסמא")
+        @Html.PasswordFor(m => m.Password)
+    </div>
+            
+    <input id="submit" type="submit" value="התחבר" />
+}
+</div>
+</div>
